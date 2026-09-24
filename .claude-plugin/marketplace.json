@@ -1,0 +1,14 @@
+{
+  "name": "claude-setup",
+  "description": "My Claude Code skills for a sprint-based coding workflow.",
+  "owner": {
+    "name": "orange-dinosaur"
+  },
+  "plugins": [
+    {
+      "name": "sprint-workflow",
+      "source": "./plugins/sprint-workflow",
+      "description": "Sprint workflow skills: start, resume and close a sprint, grill a plan, keep a glossary, cut AI tells from prose."
+    }
+  ]
+}
