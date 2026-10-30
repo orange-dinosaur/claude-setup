@@ -72,17 +72,41 @@ You should see a version number. If not, follow https://docs.claude.com/en/docs/
    /plugin install ponytail@ponytail
    /plugin marketplace add multica-ai/andrej-karpathy-skills
    /plugin install andrej-karpathy-skills@karpathy-skills
+   /plugin install frontend-design@claude-plugins-official
    ```
 
    - `ponytail` pushes Claude towards the simplest code that works. Switch its strength with
      `/ponytail lite`, `/ponytail full` or `/ponytail ultra`.
    - `andrej-karpathy-skills` adds guidelines against common LLM coding mistakes.
+   - `frontend-design` is Anthropic's guidance for UI that does not look templated.
 
-6. Quit Claude Code with `/exit` and start it again with `claude`.
+6. Quit Claude Code with `/exit`. In your normal terminal, install the design skills. You need Node
+   for `npx`.
 
-7. Check that everything loaded. Type `/plugin` and open the installed tab. You should see
-   `sprint-workflow`, `ponytail` and `andrej-karpathy-skills` listed as enabled. Then type `/` and
-   you should see `start-sprint`, `resume-sprint`, `close-session` and `unslop` in the list.
+   ```
+   npx impeccable install --providers=claude --scope=global --no-hooks
+   ```
+
+   ```
+   npx skills add vercel-labs/agent-skills --skill web-design-guidelines -g -a claude-code -y
+   ```
+
+   ```
+   npx skills add emilkowalski/skills --skill emil-design-eng --skill apple-design --skill mobile-native -g -a claude-code -y
+   ```
+
+   - `impeccable` adds `/impeccable audit`, `/impeccable polish` and other review commands. Keep
+     `--no-hooks`, or it scans every UI file Claude edits.
+   - `web-design-guidelines` reviews named files against Vercel's interface rules.
+   - `emil-design-eng`, `apple-design` and `mobile-native` cover motion, Apple-style web interaction
+     and web apps on phones.
+
+7. Start Claude Code again with `claude`.
+
+8. Check that everything loaded. Type `/plugin` and open the installed tab. You should see
+   `sprint-workflow`, `ponytail`, `andrej-karpathy-skills` and `frontend-design` listed as enabled.
+   Then type `/` and you should see `start-sprint`, `resume-sprint`, `close-session`, `unslop` and
+   `impeccable` in the list.
 
 ## Daily use
 
@@ -105,6 +129,16 @@ When this repo changes, run inside Claude Code:
 Then restart Claude Code. `CLAUDE.md` does not update by itself: repeat install step 1 to get the
 new version.
 
+To update the skills from install step 6, run these in your normal terminal:
+
+```
+npx impeccable update --no-hooks
+```
+
+```
+npx skills update -g
+```
+
 ## Make it yours
 
 - Edit `~/.claude/CLAUDE.md` freely. It is your copy and updates from this repo only happen when you
@@ -116,6 +150,12 @@ new version.
 ```
 /plugin uninstall sprint-workflow@claude-setup
 /plugin marketplace remove claude-setup
+```
+
+To remove the design skills, run this in your normal terminal:
+
+```
+npx skills remove --global web-design-guidelines emil-design-eng apple-design mobile-native
 ```
 
 Then delete or edit `~/.claude/CLAUDE.md`.

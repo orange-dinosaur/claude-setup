@@ -45,5 +45,7 @@ Tell me, as a short bulleted report:
 - The next step by number and title, what it touches, and what "done" means for it.
 - Any open fork the step is tagged to ask. Ask it now, one question at a time, with a
   recommendation, since the answer shapes the step.
+- Any `Paused:` line in the handoff, with its plan and next step. Do not read that plan. If I ask
+  to switch, swap it with the live plan in `resume.md`, leaving the old live plan as `Paused:`.
 
 Then stop and wait. The next turn implements that one step and nothing beyond it.

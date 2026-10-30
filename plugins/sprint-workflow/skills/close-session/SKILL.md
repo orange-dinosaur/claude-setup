@@ -24,6 +24,8 @@ Around forty lines. In this order:
    for the step rather than reading it end to end. Say explicitly that the older plan documents
    and the reference files are not to be opened unless a step sends you there.
 3. **Which step is next**, by number and title, and which steps are already done and committed.
+   If the old file has a `Paused:` line, carry it over unchanged. It is the only record of that
+   sprint, so read it before you replace the file.
 4. **What landed today**, in a few lines, if it is not obvious from the plan.
 5. **Open threads**, if any. Flag each one as "mention it if it becomes relevant, but don't act on
    it without asking".
