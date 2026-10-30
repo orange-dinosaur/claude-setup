@@ -8,13 +8,14 @@ workflow skills, and the third-party plugins I use.
 | Path | What it is |
 |---|---|
 | `CLAUDE.md` | Global instructions Claude reads in every project |
-| `plugins/sprint-workflow/` | Plugin with 7 skills (table below) |
+| `plugins/sprint-workflow/` | Plugin with 8 skills (table below) |
 | `plugins/sprint-workflow/SKILLS-NOTES.md` | Where each skill comes from and why it is set up this way |
 | `.claude-plugin/marketplace.json` | Lets Claude Code install this repo as a plugin marketplace |
 
 | Skill | What it does | How it runs |
 |---|---|---|
 | `start-sprint` | Opens a sprint: creates `.notes/`, questions you about the plan, writes a plan file | You type it |
+| `start-design` | Opens a design sprint: questions you, then writes a plan that goes colours, screens, full design, dev plan | You type it |
 | `resume-sprint` | Picks a sprint back up from `.notes/resume.md` and proposes the next step | You type it |
 | `close-session` | Writes `.notes/resume.md` so the next session can continue | You type it |
 | `unslop` | Rewrites text to remove AI-sounding phrasing | You type it |
@@ -105,8 +106,8 @@ You should see a version number. If not, follow https://docs.claude.com/en/docs/
 
 8. Check that everything loaded. Type `/plugin` and open the installed tab. You should see
    `sprint-workflow`, `ponytail`, `andrej-karpathy-skills` and `frontend-design` listed as enabled.
-   Then type `/` and you should see `start-sprint`, `resume-sprint`, `close-session`, `unslop` and
-   `impeccable` in the list.
+   Then type `/` and you should see `start-sprint`, `start-design`, `resume-sprint`,
+   `close-session`, `unslop` and `impeccable` in the list.
 
 ## Daily use
 
@@ -117,6 +118,21 @@ You should see a version number. If not, follow https://docs.claude.com/en/docs/
 
 The skills keep their notes in a `.notes/` folder in your project. Add `.notes/` to the project's
 `.gitignore` so it stays out of your commits.
+
+### Design sprints
+
+Type `/start-design` instead of `/start-sprint` to design or redesign a project. Then use
+`/resume-sprint` and `/close-session` as usual.
+
+- Each step stops for your OK: style, 3 palettes, fonts, one or two screens, then the other screens
+  one at a time. This way you approve the direction before the expensive work.
+- Each step gives you an `open` command that shows the page in your browser. Refresh the tab after
+  a change.
+- The last steps review the screens, publish them as a private artifact, and write a dev plan that
+  becomes the live sprint.
+- The files stay in `.notes/design/`, so a fresh clone does not have them.
+- If a sprint is open, `/start-design` asks to pause it. `/resume-sprint` tells you about the
+  paused sprint and switches when you ask.
 
 ## Update
 

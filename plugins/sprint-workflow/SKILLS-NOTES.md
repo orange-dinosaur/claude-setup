@@ -11,6 +11,7 @@ you update one, re-apply the edits listed below.
 | `domain-modeling` | [mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling) (MIT) | writes `.notes/reference/glossary.md` and `.notes/reference/decisions.md` instead of a root `CONTEXT.md` and `docs/adr/`; `CONTEXT-FORMAT.md` renamed to `GLOSSARY-FORMAT.md`; multi-context `CONTEXT-MAP.md` section dropped |
 | `unslop` | [cursor/plugins](https://github.com/cursor/plugins/tree/main/pstack/skills/unslop) | none |
 | `start-sprint` | local | — |
+| `start-design` | local | — |
 | `close-session` | local | — |
 | `resume-sprint` | local | — |
 | `graphify` | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify), written by its CLI | `disable-model-invocation: true` added to the frontmatter; reinstalling drops it |
@@ -30,10 +31,10 @@ The upstream repository is a Claude Code plugin marketplace of 25 skills. It is 
 installed as a plugin: that would load 25 skill descriptions into every session's context, and
 only these three are wanted.
 
-`unslop`, `start-sprint`, `resume-sprint`, `close-session` and `graphify` set `disable-model-invocation: true`,
-so they run only when I invoke them by name.
+`unslop`, `start-sprint`, `start-design`, `resume-sprint`, `close-session` and `graphify` set
+`disable-model-invocation: true`, so they run only when I invoke them by name.
 
-`grill-with-docs` deliberately does not. `start-sprint` step 3 hands off to it, and a skill with
+`grill-with-docs` deliberately does not. `start-sprint` step 3 and `start-design` step 4 hand off to it, and a skill with
 that flag set cannot be reached through the Skill tool at all, only by typing `/grill-with-docs`
 myself. The cost of leaving the flag off is one more description in every session's context and
 the chance the model picks the skill up unprompted, which the last sentence of the description is

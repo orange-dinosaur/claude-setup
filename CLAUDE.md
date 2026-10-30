@@ -46,7 +46,8 @@ and `reference/` for material consulted only when a step needs it.
   guessed. Anything read every session is paid for every session.
 - If a step proves the plan wrong, stop and amend the plan with me. Do not improvise around it.
 - Apply a new documentation convention going forward only. Do not rewrite settled entries.
-- `/start-sprint` opens a sprint. `/resume-sprint` picks one up. `/close-session` ends a session.
+- `/start-sprint` opens a sprint and `/start-design` opens a design sprint. `/resume-sprint` picks
+  either up. `/close-session` ends a session.
 
 ## Prose and comments
 
