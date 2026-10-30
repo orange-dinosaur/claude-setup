@@ -142,7 +142,14 @@ When this repo changes, run inside Claude Code:
 /plugin marketplace update claude-setup
 ```
 
-Then restart Claude Code. `CLAUDE.md` does not update by itself: repeat install step 1 to get the
+Then run this in your normal terminal and restart Claude Code:
+
+```
+claude plugin update sprint-workflow@claude-setup
+```
+
+Claude Code keeps a copy per plugin version, so a change to this repo only arrives if it bumps
+`version` in `plugins/sprint-workflow/.claude-plugin/plugin.json`. `CLAUDE.md` does not update by itself: repeat install step 1 to get the
 new version.
 
 To update the skills from install step 6, run these in your normal terminal:

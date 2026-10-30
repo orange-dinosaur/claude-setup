@@ -1,6 +1,6 @@
 {
   "name": "sprint-workflow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sprint workflow skills: start, resume and close a sprint, grill a plan, keep a glossary, cut AI tells from prose.",
   "author": {
     "name": "orange-dinosaur"
