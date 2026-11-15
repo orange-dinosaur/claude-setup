@@ -18,6 +18,7 @@ workflow skills, and the third-party plugins I use.
 |---|---|---|
 | `start-sprint` | Opens a sprint: creates `.notes/`, questions you about the plan, writes a plan file | You type it |
 | `start-design` | Opens a design sprint: questions you, then writes a plan that goes colours, screens, full design, dev plan | You type it |
+| `start-audit` | Opens an audit sprint: maps the code, reviews the parts you approve, writes a plan to fix what it found | You type it |
 | `resume-sprint` | Picks a sprint back up from `.notes/resume.md` and proposes the next step | You type it |
 | `close-session` | Writes `.notes/resume.md` so the next session can continue | You type it |
 | `unslop` | Rewrites text to remove AI-sounding phrasing | You type it |
@@ -118,7 +119,7 @@ You should see a version number. If not, follow https://docs.claude.com/en/docs/
 
 8. Check that everything loaded. Type `/plugin` and open the installed tab. You should see
    `sprint-workflow`, `ponytail` and `andrej-karpathy-skills` enabled, and `frontend-design`
-   disabled. Type `/` and you should see `start-sprint`, `start-design`, `resume-sprint`,
+   disabled. Type `/` and you should see `start-sprint`, `start-design`, `start-audit`, `resume-sprint`,
    `close-session` and `unslop`, and no `impeccable`. Then `/exit`, run `claude-design` and type
    `/skills`: you should see `design-kit:impeccable`, the other four design skills and
    `frontend-design:frontend-design`.
