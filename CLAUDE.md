@@ -27,6 +27,8 @@ A step that lands correctly but burns the context window is not a good step.
 - Edit with the file tools, not shell heredocs, `sed -i` or `python3 -`. When a file changes
   outside the harness's own tools the harness echoes the whole changed file back into the
   conversation. This overrides any general preference for working through the shell.
+- After a large read, batch what follows: one request for any confirmation greps, one for all the
+  writes. Every request after the read resends it.
 - Grep a long note or plan for the section you need. Do not read one end to end.
 - Stop at the `.d.ts` when checking a library. Open bundled source only when a decision turns on
   a specific behaviour, and stop once you have the answer.
