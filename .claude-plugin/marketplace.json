@@ -8,7 +8,7 @@
     {
       "name": "sprint-workflow",
       "source": "./plugins/sprint-workflow",
-      "description": "Sprint workflow skills: start, resume and close a sprint, grill a plan, keep a glossary, cut AI tells from prose."
+      "description": "Sprint workflow skills: start, audit, resume and close a sprint, grill a plan, keep a glossary, cut AI tells from prose."
     }
   ]
 }
