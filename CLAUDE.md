@@ -36,8 +36,9 @@ A step that lands correctly but burns the context window is not a good step.
   request.
 - Write long output (findings, plans, write-ups) once, straight into its file. Do not draft it in
   your reasoning first and then copy it out, which pays for it twice.
-- Review passes and other read-heavy, no-code steps run on Sonnet. Before starting one, check the
-  session model. If it is not Sonnet, say so in the first line and stop until I switch.
+- Audits and reviews run on Opus; the changes that come out of them run on Sonnet. Before starting
+  a step, check the session model. If it is the wrong one, say so in the first line and stop until
+  I switch.
 
 ## Project notes
 
