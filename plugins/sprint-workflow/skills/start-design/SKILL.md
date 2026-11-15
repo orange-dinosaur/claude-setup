@@ -8,6 +8,11 @@ disable-model-invocation: true
 
 Work through these in order. Stop at the end for review; do not begin designing.
 
+## 0. Check the design kit is loaded
+
+The design skills load only in a session started with `claude-design`. If `design-kit:impeccable`
+is not among your skills, stop and tell me to `/exit` and start again with `claude-design`.
+
 ## 1. Scaffold, if this project has no notes yet
 
 If `.notes/` is missing, create `.notes/`, `.notes/dev_plans/` and `.notes/reference/`, and append

@@ -36,6 +36,9 @@ open older plans or anything in `.notes/reference/` unless the step sends you th
 If the step's write-up says it already landed, or its commit is recorded, move to the one after it
 and tell me the handoff was behind.
 
+If the live plan is a design sprint (its steps work in `.notes/design/`) and `design-kit:impeccable`
+is not among your skills, stop and tell me to `/exit` and start again with `claude-design`.
+
 ## 4. Report and stop
 
 Tell me, as a short bulleted report:

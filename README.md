@@ -11,6 +11,8 @@ workflow skills, and the third-party plugins I use.
 | `plugins/sprint-workflow/` | Plugin with 8 skills (table below) |
 | `plugins/sprint-workflow/SKILLS-NOTES.md` | Where each skill comes from and why it is set up this way |
 | `.claude-plugin/marketplace.json` | Lets Claude Code install this repo as a plugin marketplace |
+| `plugins/design-kit/` | Design skills and agents, loaded only in sessions started with `claude-design` |
+| `skills-lock.json` | Which design skills `npx skills` installed, and from where |
 
 | Skill | What it does | How it runs |
 |---|---|---|
@@ -38,13 +40,17 @@ You should see a version number. If not, follow https://docs.claude.com/en/docs/
 
 ## Install
 
-1. Copy the global instructions. If you already have a `~/.claude/CLAUDE.md`, back it up first,
-   because this overwrites it.
+1. Clone this repo and link the global instructions to it. If you already have a
+   `~/.claude/CLAUDE.md`, back it up first, because this replaces it.
 
    ```
+   git clone https://github.com/orange-dinosaur/claude-setup.git ~/claude-setup
+   cd ~/claude-setup
    mkdir -p ~/.claude
-   curl -fsSL https://raw.githubusercontent.com/orange-dinosaur/claude-setup/main/CLAUDE.md -o ~/.claude/CLAUDE.md
+   ln -sfn "$PWD/CLAUDE.md" ~/.claude/CLAUDE.md
    ```
+
+   A rule change then shows up as a diff in the clone, and `git pull` brings in new rules.
 
 2. Start Claude Code in any folder:
 
@@ -81,19 +87,18 @@ You should see a version number. If not, follow https://docs.claude.com/en/docs/
    - `andrej-karpathy-skills` adds guidelines against common LLM coding mistakes.
    - `frontend-design` is Anthropic's guidance for UI that does not look templated.
 
-6. Quit Claude Code with `/exit`. In your normal terminal, install the design skills. You need Node
-   for `npx`.
+   Then open `/plugin`, go to the installed tab and disable `frontend-design`. `claude-design`
+   (step 6) turns it on for design sessions only, so other sessions do not pay for it.
+
+6. Quit Claude Code with `/exit`. In your normal terminal, install the design skills into the clone.
+   You need Node for `npx`. Run them from the clone's root: project scope writes to the repo's
+   `.claude/`, which `plugins/design-kit` links to and git ignores.
 
    ```
-   npx impeccable install --providers=claude --scope=global --no-hooks
-   ```
-
-   ```
-   npx skills add vercel-labs/agent-skills --skill web-design-guidelines -g -a claude-code -y
-   ```
-
-   ```
-   npx skills add emilkowalski/skills --skill emil-design-eng --skill apple-design --skill mobile-native -g -a claude-code -y
+   cd ~/claude-setup
+   npx impeccable install --providers=claude --scope=project --no-hooks
+   npx skills add vercel-labs/agent-skills --skill web-design-guidelines -a claude-code -y
+   npx skills add emilkowalski/skills --skill emil-design-eng --skill apple-design --skill mobile-native -a claude-code -y
    ```
 
    - `impeccable` adds `/impeccable audit`, `/impeccable polish` and other review commands. Keep
@@ -102,12 +107,21 @@ You should see a version number. If not, follow https://docs.claude.com/en/docs/
    - `emil-design-eng`, `apple-design` and `mobile-native` cover motion, Apple-style web interaction
      and web apps on phones.
 
+   Then add the command that starts a session with them loaded. Use `~/.bashrc` if your shell is bash.
+
+   ```
+   echo "alias claude-design='claude --plugin-dir $PWD/plugins/design-kit --settings $PWD/plugins/design-kit/session-settings.json'" >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
 7. Start Claude Code again with `claude`.
 
 8. Check that everything loaded. Type `/plugin` and open the installed tab. You should see
-   `sprint-workflow`, `ponytail`, `andrej-karpathy-skills` and `frontend-design` listed as enabled.
-   Then type `/` and you should see `start-sprint`, `start-design`, `resume-sprint`,
-   `close-session`, `unslop` and `impeccable` in the list.
+   `sprint-workflow`, `ponytail` and `andrej-karpathy-skills` enabled, and `frontend-design`
+   disabled. Type `/` and you should see `start-sprint`, `start-design`, `resume-sprint`,
+   `close-session` and `unslop`, and no `impeccable`. Then `/exit`, run `claude-design` and type
+   `/skills`: you should see `design-kit:impeccable`, the other four design skills and
+   `frontend-design:frontend-design`.
 
 ## Daily use
 
@@ -121,8 +135,10 @@ The skills keep their notes in a `.notes/` folder in your project. Add `.notes/`
 
 ### Design sprints
 
-Type `/start-design` instead of `/start-sprint` to design or redesign a project. Then use
-`/resume-sprint` and `/close-session` as usual.
+Start Claude Code with `claude-design` instead of `claude`, then type `/start-design` instead of
+`/start-sprint` to design or redesign a project. Use `/resume-sprint` and `/close-session` as usual,
+also from a `claude-design` session. If you forget, `/start-design` and `/resume-sprint` stop and
+tell you to restart with `claude-design`.
 
 - Each step stops for your OK: style, 3 palettes, fonts, one or two screens, then the other screens
   one at a time. This way you approve the direction before the expensive work.
@@ -149,17 +165,15 @@ claude plugin update sprint-workflow@claude-setup
 ```
 
 Claude Code keeps a copy per plugin version, so a change to this repo only arrives if it bumps
-`version` in `plugins/sprint-workflow/.claude-plugin/plugin.json`. `CLAUDE.md` does not update by itself: repeat install step 1 to get the
-new version.
+`version` in `plugins/sprint-workflow/.claude-plugin/plugin.json`. `CLAUDE.md` updates with
+`git pull` in your clone, since `~/.claude/CLAUDE.md` links to it.
 
-To update the skills from install step 6, run these in your normal terminal:
+To update the design skills from install step 6, run these in your normal terminal:
 
 ```
+cd ~/claude-setup
 npx impeccable update --no-hooks
-```
-
-```
-npx skills update -g
+npx skills update
 ```
 
 ## Make it yours
