@@ -1,2 +1,5 @@
 # Working notes, not part of the project
 .notes/
+
+# What the design installers write. plugins/design-kit links to it.
+.claude/
