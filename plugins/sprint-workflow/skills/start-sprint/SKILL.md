@@ -1,6 +1,6 @@
 ---
 name: start-sprint
-description: Open a development sprint. Scaffolds .notes/ if missing, grills the sprint until the design is settled, then writes a plan document a cold agent can execute.
+description: Open a development sprint. Scaffolds .notes as a link into development_notes if missing, grills the sprint until the design is settled, then writes a plan document a cold agent can execute.
 disable-model-invocation: true
 ---
 
@@ -10,15 +10,28 @@ Work through these in order. Stop at the end for review; do not begin implementi
 
 ## 1. Scaffold, if this project has no notes yet
 
-If `.notes/` is missing, create `.notes/`, `.notes/dev_plans/` and `.notes/reference/`, and append
-to `.gitignore`:
+Notes live in the shared `development_notes` repository next to the project, one folder per
+project, and the project's `.notes` is a symlink into it. If `.notes` already exists, as a link or
+a real folder, leave it alone.
+
+Otherwise, from the project root, with `<project>` as the root folder's name:
+
+1. If `../development_notes` does not exist, stop and ask me where it is.
+2. Create `../development_notes/<project>/.notes/dev_plans/` and
+   `../development_notes/<project>/.notes/reference/`.
+3. Link it: `ln -s ../development_notes/<project>/.notes .notes`.
+
+Then append to `.gitignore`, unless it already ignores `.notes`:
 
 ```
 # Working notes, not part of the project
-.notes/
+.notes
 ```
 
-If the repository has no `.gitignore`, create one with just that entry.
+No trailing slash: `.notes/` matches only a directory, so git would track the symlink. If the
+repository has no `.gitignore`, create one with just that entry.
+
+Committing the notes is my job, in `development_notes`.
 
 ## 2. The project profile, if `resume.md` is missing
 
