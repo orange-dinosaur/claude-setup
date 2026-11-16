@@ -58,23 +58,96 @@ Scan `.notes/dev_plans/` for the highest existing number and write
 without problems.** Everything it needs is in the document or reachable from it. Write it to that
 standard from the start rather than a terse table of steps.
 
-Sections:
+**The level of detail: the executing agent types, it does not design.** Every name and every
+behaviour is decided in the plan. If a step leaves the agent to pick a function name, a column
+type, an error message or what happens at an edge, the step is not finished. Expect 30 to 50 lines
+per step and 200 to 350 for the plan. Do not trim it to look tidy.
 
-- **Working rules for this repo.** The exact commands that must go green, that I commit, one step
-  per turn, that design forks are asked one at a time. Anything project-specific that overrides
-  the global rules.
-- **Orientation.** The parts of the existing code this sprint touches, and the gotchas already
-  paid for. Enough to start, not a tour.
-- **Decisions this rests on.** Restated inline, not only linked. A cold agent should not have to
-  open `reference/decisions.md` to understand the plan.
-- **Assumed, not verified.** An explicit list of what was taken on faith, with an instruction to
-  correct this document as each one is established.
-- **Steps**, numbered from 1. Each step is small, self-contained and independently committable.
-  Each names the files it touches and what "done" means. Leave room for a commit hash and a short
-  write-up to be appended when it lands.
-- **Open forks**, at the bottom, each tagged with the step that will ask it. Do not ask them now.
+Before writing, read the code the sprint touches, so the plan quotes real paths, signatures and
+props instead of guessing them. What you could not check goes under "Assumed, not verified".
 
-A step that spans both halves of the stack is too big. Split it.
+### Sections, in this order
+
+- **Title and goal.** `# Sprint N: Name`, then a `**Goal.**` paragraph: what a user can do when
+  the sprint is over, in two or three sentences.
+- **Working rules for this repo.** Five bullets at most: the exact commands that must go green,
+  written out in full; that I commit and add packages; one step per turn; design forks asked one
+  at a time with a recommendation; stop if the code disagrees with the plan. Add the words to use
+  in anything a user reads, and the words never to use, from the glossary.
+- **How to read a step.** Copy the block below into every plan, adjusting only the file it names.
+- **Orientation.** Bullets on the existing code this sprint touches: the real function signatures,
+  component props, table columns and patterns the steps will call or copy, each with its path. Add
+  the gotchas already paid for. Enough to start, not a tour.
+- **Decisions this rests on.** Each one a bold statement and its reason, restated inline, not only
+  linked. A cold agent should not have to open `reference/decisions.md` to understand the plan.
+  Say what is deliberately left to a later sprint.
+- **Assumed, not verified.** A numbered list of what was taken on faith.
+- **Steps**, as described below.
+- **Open forks**, at the bottom. Each one names the step that will ask it, the options, and a
+  recommendation. Do not ask them now.
+
+### The "How to read a step" block
+
+```markdown
+## How to read a step
+
+Every step has the same parts, in this order:
+
+1. **What this step does**: the result, and what is deliberately left for later.
+2. **How it fits together**: which file calls which.
+3. **Order of work**: numbered actions. Do them in that order, one at a time.
+4. **Files**: the exact content of each file. Names of files, functions, parameters, columns and
+   every sentence shown to the user are given here and are to be used as written.
+5. **Done**: the checks that must pass before the step is finished.
+
+Before step 1, settle every item under "Assumed, not verified" and write the answer into this
+plan. If something you need is not written in the step, in `reference/conventions.md`, or in the
+code already there, **stop and ask. Do not invent a name, a behaviour or a sentence.** A sentence
+tagged **DRAFT** was not yet read by me: show it and wait before using it.
+```
+
+### Steps
+
+`### Step N: short name`, numbered from 1. Each step is small, self-contained and independently
+committable. A step that spans both halves of the stack is too big. Split it. Each step has the
+five parts, as bold run-in labels:
+
+- **What this step does.** Two or three sentences: the result a user or caller gets, and what is
+  left for a named later step.
+- **How it fits together.** A paragraph on the mechanism: which file calls which, what each table
+  or function is for, and the one design point that makes it work, such as the constraint that
+  enforces a rule or the single helper every page goes through.
+- **Order of work.** Numbered actions, one per line, in the order to do them, ending with the
+  check command. Include the generate and migrate commands where a schema changes.
+- **Files.** One bullet per file, with its full path, and sub-bullets for what goes in it:
+  - a table: every column with its type, nullability, default, maximum length, what happens on
+    delete, and the keys;
+  - a function: its full signature, who may call it, what it returns, and each refusal with the
+    exact error text;
+  - a page or component: its props, who may open it and what the others get, its sections in
+    order, and every label, button, hint, empty state and message, word for word;
+  - an email: subject and body, word for word;
+  - tests: one clause per test, naming the behaviour it pins. Prefer the refusals and the cases
+    where something must stay hidden.
+
+  Where a step changes a file an earlier step wrote, say what is added. Where it copies an
+  existing pattern, name the function or sprint it copies from.
+- **Done.** The check command, plus what I do in the browser or terminal and what I see, when the
+  checks cannot prove it.
+
+Tag with **DRAFT** every user-facing sentence I did not approve during the grill. Sentences I did
+approve, or that already exist in the code, carry no tag.
+
+The last step also updates `reference/conventions.md` with the patterns this sprint added, and
+`resume.md` to say the sprint is done.
+
+Leave each step room for a commit hash and a short write-up to be appended when it lands.
+
+### Before you stop
+
+Read the plan once as the cold agent. For each step ask: is there a name, type, sentence or edge
+case I would have to make up? Either write it in, or list it under "Assumed, not verified" or
+"Open forks".
 
 ## 5. Point at it
 
