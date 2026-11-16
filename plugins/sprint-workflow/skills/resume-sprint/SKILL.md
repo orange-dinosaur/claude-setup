@@ -29,8 +29,8 @@ proposing anything that would touch the same files.
 ## 3. Find the next step
 
 The handoff names the live plan and the next step by number. Grep
-`.notes/dev_plans/NN-name.md` for that step and read only that section, plus the working rules and
-the "assumed, not verified" list if the file has them. Do not read the plan end to end, and do not
+`.notes/dev_plans/NN-name.md` for that step and read only that section, plus the working rules, "How to
+read a step" and the "assumed, not verified" list if the file has them. Do not read the plan end to end, and do not
 open older plans or anything in `.notes/reference/` unless the step sends you there.
 
 If the step's write-up says it already landed, or its commit is recorded, move to the one after it

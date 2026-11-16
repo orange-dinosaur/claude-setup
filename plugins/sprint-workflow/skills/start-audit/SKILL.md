@@ -65,12 +65,33 @@ findings file as it is made.
 ## 6. Write the plan
 
 Write `.notes/dev_plans/NN-audit-<scope>.md` to the contract and sections in `start-sprint` step 4.
-Read that section rather than rewriting it from memory. On top of that contract:
+Read that section rather than rewriting it from memory. It sets the level of detail: the "How to
+read a step" block, five-part steps, and every name, behaviour and sentence decided in the plan.
 
-- Order steps `bug` first, then `risk`, then `cleanup`.
-- Each step names the finding it fixes and links to the findings file.
-- A bug fix step includes the check that would have caught it.
-- Deferred findings go in a **Deferred** section at the bottom, one line each.
+A one-line finding is not enough to write a step at that level. For each finding accepted in
+triage, read the function it points at and its callers' call sites, by line range, not the whole
+file. Read nothing for deferred or dropped findings.
+
+On top of that contract:
+
+- **Goal.** What is fixed when the sprint is over, as a count per severity, and the scope audited.
+- **Orientation.** The areas audited, and for each the check command and the test file its fixes
+  will extend, or that it has none.
+- Order steps `bug` first, then `risk`, then `cleanup`. One finding per step, unless several share
+  one root cause, in which case fix it once where the callers meet and list every finding it
+  closes.
+- **What this step does** restates the finding in full: `file:line`, the input or state that
+  triggers it, what happens now and what must happen instead. Link the findings file as well, but
+  a cold agent must not need to open it.
+- **How it fits together** names the root cause and every caller of the function being changed,
+  with paths, and says which of them the change affects.
+- **Files** gives the change itself: the function's signature before and after, the new behaviour
+  at each branch, and any error text word for word. For a `cleanup` step, name what is deleted and
+  what replaces it, and state that behaviour does not change.
+- A `bug` or `risk` step names its test: the file, the test's name, the input and the expected
+  result. **Order of work** writes that test first and sees it fail before the fix.
+- **Done** is the check command plus that test passing.
+- Deferred findings go in a **Deferred** section at the bottom, one line each, with the reason.
 
 ## 7. Point at it
 
